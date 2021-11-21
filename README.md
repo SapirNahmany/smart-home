@@ -9,7 +9,7 @@ The system consists of a central unit service and three smart devices services -
 The central unit fetches every hour weather data from a third-party API,
 and sends to the devices one of the following signals: HOT/COLD/NORMAL, according to the current temperature.
 
-Every smart device react to the signals according to requsted logic.
+Every smart device react to the signals according to required logic.
 
 
 ## Technologies
