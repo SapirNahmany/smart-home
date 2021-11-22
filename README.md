@@ -25,7 +25,7 @@ PORT=3000
 
 CITY_NAME=Tel-Aviv
 
-API_KEY - from your account in <a href = "https://openweathermap.org/">OpenWeather</a>
+API_KEY = The api key from your account in <a href = "https://openweathermap.org/">OpenWeather</a>
 
 WEATHER_API_URL=http://api.openweathermap.org/data/2.5/weather
 
@@ -61,4 +61,8 @@ Enter the smart-device dir and run the following commands, each in a seperate te
 Enter the central-unit dir and run the following command in a seperate terminal.
 
 `npm run start`
+
+**Assumptions:**
+    // air conditioner is on at 25 degrees when app is starting.
+
 
