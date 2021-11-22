@@ -5,18 +5,15 @@ import Signal from "./Signal";
 const HOUR_IN_MS = 60 * 60 * 1000;
 const TWENTY_FIVE_MIN = 25 * 60 * 1000;
 
-// TODO -> singelton
 export default class WaterHeater extends SmartDevice {
     
     private nextComingHomeTimingsInMs: number;
-
-    // TODO -> should be sorted
+    //predefined coming back home times
     private comingHomeTimings: Array<number> = [
         HOUR_IN_MS * 0.5,
-        HOUR_IN_MS * 3,
-        HOUR_IN_MS * 4.5,
-        HOUR_IN_MS * 15,
-        HOUR_IN_MS * 24
+        HOUR_IN_MS * 2.5,
+        HOUR_IN_MS * 3.25,
+        HOUR_IN_MS * 3.5
     ];
 
     constructor(defaultSignal: Signal) {
@@ -28,8 +25,8 @@ export default class WaterHeater extends SmartDevice {
 
     onComingHome(): void {
         const lastComingHomeTime = this.comingHomeTimings[0];
-        this.comingHomeTimings = this.comingHomeTimings.slice(1);
-        if (this.comingHomeTimings.length > 1) {
+        this.comingHomeTimings = this.comingHomeTimings.slice(1); //pop
+        if (this.comingHomeTimings.length >= 1) {
             this.nextComingHomeTimingsInMs = Date.now() + this.comingHomeTimings[0] - lastComingHomeTime;
             setTimeout(this.onComingHome.bind(this), this.comingHomeTimings[0] - lastComingHomeTime);
         }
@@ -42,17 +39,20 @@ export default class WaterHeater extends SmartDevice {
             status: this.isOn ? "on" : "off"
         };
         if (newSignal === Signal.COLD) {
-            if (Date.now() + HOUR_IN_MS >= this.nextComingHomeTimingsInMs) {
+            //someone coming home in the next hour
+            if (Date.now() + HOUR_IN_MS >= this.nextComingHomeTimingsInMs && this.comingHomeTimings.length > 0) {
                 responseBody.status = "on";
-                responseBody.message = this.isOn ? 
-                    "Water Heater is already on" : 
-                    "Tunred water-heater on for 25 minutes, since someone coming home in the next hour";
-                if (!this.isOn) {
-                    this.turnOn();
-                    setTimeout(this.turnOff, TWENTY_FIVE_MIN);
-                }
+                responseBody.message = "Tunred water-heater on for 25 minutes, since someone coming home in the next hour";
+                this.turnOn();
+                setTimeout(this.turnOff.bind(this), TWENTY_FIVE_MIN);   
+            } else{
+                responseBody.status = this.isOn ? "on": "off";
+                responseBody.message = "Water-heater dose not turning on, since no one is coming home in the next hour";
             }
+        } else{
+            responseBody.message = `Water-heater dose not turning on sicne ${newSignal} signal arrived.`
         }
+
         res.json(responseBody).status(200);
     }
 

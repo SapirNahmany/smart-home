@@ -1,12 +1,12 @@
 import axios, { AxiosResponse } from "axios";
 import Signal from "./Signal";
 
-const HOUR = 20 * 1000; // TODO -> use as env var
+const HOUR = 60 * 60 * 1000;
 
-// TODO -> singelton
 export default class SignalHandler {
 
     initHandler(): void {
+        this.cycle();  //added
         setInterval(this.cycle.bind(this), HOUR);
     }
 
@@ -43,10 +43,10 @@ export default class SignalHandler {
                 params: {
                     q: process.env.CITY_NAME,
                     appid: process.env.API_KEY,
-                    units: "metric" // this will fetch temerature as Celsius
+                    units: "metric" // this will fetch temperature as Celsius
                 }
             });
-            console.log(`The response body from weather API: ${JSON.stringify(response.data)}`);
+            //console.log(`Got response body from weather API: ${JSON.stringify(response.data)}`);
             return response;
         } catch (error) {
             console.error("Failed to fetch wether", error.message);

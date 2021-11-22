@@ -7,17 +7,17 @@ import SmartDevice from "../models/SmartDevice";
 let device: SmartDevice;
 
 export const initDevice = (defaultSignal: Signal): SmartDevice => {
-    if (process.env.DEVICE_PRODUCT === "switch") {
+    if (process.env.DEVICE_TYPE === "switch") {
         device = new Switch(defaultSignal);
-    } else if (process.env.DEVICE_PRODUCT === "air-conditioner") {
+    } else if (process.env.DEVICE_TYPE === "air-conditioner") {
         device = new AirConditioner(defaultSignal);
-    } else if (process.env.DEVICE_PRODUCT === "water-heater") {
+    } else if (process.env.DEVICE_TYPE === "water-heater") {
         device = new WaterHeater(defaultSignal);
     } else {
-        console.error("DEVICE_PRODUCT is mandatory and should be one of: switch / air-conditioner / water-heater");
+        console.error("DEVICE_TYPE is mandatory and should be one of: switch / air-conditioner / water-heater");
         process.exit(1);
     }
 
-    console.log(`The device is: ${process.env.DEVICE_PRODUCT}`);
+    console.log(`The device is: ${process.env.DEVICE_TYPE}`);
     return device;
 };

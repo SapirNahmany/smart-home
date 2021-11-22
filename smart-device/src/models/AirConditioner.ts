@@ -4,13 +4,12 @@ import Signal from "./Signal";
 
 const ROOM_TEMPERATURE = 25;
 const MIN_TEMPERATURE = 16;
-const MAX_TEMPERATURE = 32;
+const MAX_TEMPERATURE = 40;
 
-// TODO -> singelton
 export default class AirConditioner extends SmartDevice {
     private degrees: number;
 
-    // air conditioner is on when app is starting
+    // air conditioner is on when app is starting 
     constructor(defaultSignal: Signal) {
         super(defaultSignal);
         this.isOn = true;
@@ -51,7 +50,7 @@ export default class AirConditioner extends SmartDevice {
         } else {
             this.degrees -= 10;
         }
-        console.log(`Temperature decreased to ${this.degrees} degrees`);
+        console.log(`Air conditioner temperature decreased to ${this.degrees} degrees`);
     }
 
     increaseTemperature(): void {
@@ -60,7 +59,7 @@ export default class AirConditioner extends SmartDevice {
         } else {
             this.degrees += 13;
         }
-        console.log(`Temperature increased to ${this.degrees} degrees`);
+        console.log(`Air conditioner temperature increased to ${this.degrees} degrees`);
     }
 
     turnOff(): void {

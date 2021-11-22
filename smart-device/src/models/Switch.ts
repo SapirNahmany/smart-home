@@ -2,7 +2,6 @@ import { Response } from "express";
 import SmartDevice from "./SmartDevice";
 import Signal from "./Signal";
 
-// TODO -> singelton
 export default class Switch extends SmartDevice {
 
     constructor(defaultSignal: Signal) {
@@ -17,7 +16,7 @@ export default class Switch extends SmartDevice {
         } else if (this.signal === Signal.HOT) {
             this.turnOff();
         } else { // this.signal === Signal.NORMAL
-            console.log(`Light is stay ${this.isOn ? "on" : "off"}`);
+            console.log(`Light is staying ${this.isOn ? "on" : "off"}`);
         }
         const responseBody: SwitchResponse = {
             status: this.isOn ? "on" : "off"
