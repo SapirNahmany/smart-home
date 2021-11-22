@@ -42,7 +42,7 @@ export default class WaterHeater extends SmartDevice {
             //someone coming home in the next hour
             if (Date.now() + HOUR_IN_MS >= this.nextComingHomeTimingsInMs && this.comingHomeTimings.length > 0) {
                 responseBody.status = "on";
-                responseBody.message = "Tunred water-heater on for 25 minutes, since someone coming home in the next hour";
+                responseBody.message = "Turned water-heater on for 25 minutes, since someone coming home in the next hour";
                 this.turnOn();
                 setTimeout(this.turnOff.bind(this), TWENTY_FIVE_MIN);   
             } else{
@@ -58,12 +58,12 @@ export default class WaterHeater extends SmartDevice {
 
     turnOff(): void {
         this.isOn = false;
-        console.log("Tunred water-heater off");
+        console.log("Turned water-heater off");
     }
 
     turnOn(): void {
         this.isOn = true;
-        console.log("Tunred water-heater on");
+        console.log("Turned water-heater on");
     }
 }
 

@@ -64,12 +64,12 @@ export default class AirConditioner extends SmartDevice {
 
     turnOff(): void {
         this.isOn = false;
-        console.log("Tunred air-conditioner off");
+        console.log("Turned air-conditioner off");
     }
 
     turnOn(): void {
         this.isOn = true;
-        console.log("Tunred air-conditioner on");
+        console.log("Turned air-conditioner on");
     }
 }
 

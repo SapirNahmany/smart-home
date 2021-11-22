@@ -6,7 +6,7 @@ const HOUR = 60 * 60 * 1000;
 export default class SignalHandler {
 
     initHandler(): void {
-        this.cycle();  //added
+        this.cycle();
         setInterval(this.cycle.bind(this), HOUR);
     }
 
