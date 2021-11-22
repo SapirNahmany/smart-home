@@ -63,6 +63,6 @@ Enter the central-unit dir and run the following command in a seperate terminal.
 `npm run start`
 
 **Assumptions:**
-    // air conditioner is on at 25 degrees when app is starting.
+The air conditioner is on at 25 degrees when app is starting.
 
 
